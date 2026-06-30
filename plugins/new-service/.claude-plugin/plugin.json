@@ -1,0 +1,12 @@
+{
+  "name": "new-service",
+  "description": "Bootstrap and build a microservice with devedge-sdk from a single prompt: discover and pin the SDK, scaffold a fail-closed gRPC/REST service, model the domain, generate, build, and run.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Infoblox"
+  },
+  "homepage": "https://github.com/infobloxopen/devedge-sdk",
+  "repository": "https://github.com/infobloxopen/devedge-claude-plugins",
+  "license": "Apache-2.0",
+  "keywords": ["devedge", "devedge-sdk", "microservice", "scaffold", "bootstrap", "grpc", "go", "api"]
+}

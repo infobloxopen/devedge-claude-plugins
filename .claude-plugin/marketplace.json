@@ -1,0 +1,19 @@
+{
+  "name": "devedge",
+  "owner": {
+    "name": "Infoblox",
+    "url": "https://github.com/infobloxopen"
+  },
+  "metadata": {
+    "description": "devedge developer-experience plugins for Claude Code — bootstrap and build microservices on devedge-sdk.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "new-service",
+      "source": "./plugins/new-service",
+      "description": "Bootstrap and build a microservice with devedge-sdk from a single prompt: discover and pin the SDK, scaffold a fail-closed gRPC/REST service, model the domain, generate, build, and run.",
+      "version": "0.1.0"
+    }
+  ]
+}
