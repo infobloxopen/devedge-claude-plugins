@@ -1,7 +1,7 @@
 {
   "name": "new-service",
   "description": "Bootstrap and build a microservice with devedge-sdk from a single prompt: discover and pin the SDK, scaffold a fail-closed gRPC/REST service, model the domain, generate, build, and run.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "Infoblox"
   },
