@@ -1,8 +1,9 @@
 # devedge plugins for Claude Code
 
 Claude Code plugins for the [devedge](https://github.com/infobloxopen/devedge) developer
-experience. Install once, then build microservices on
-[`devedge-sdk`](https://github.com/infobloxopen/devedge-sdk) from a single prompt.
+experience — skills for the common devedge operations, from bootstrapping a service on
+[`devedge-sdk`](https://github.com/infobloxopen/devedge-sdk) to publishing its API, running it
+on the local edge, scaffolding a micro-frontend, and composing services into one binary.
 
 > These are **Claude Code** plugins (skills), not plugins for the devedge product itself.
 
@@ -10,25 +11,34 @@ experience. Install once, then build microservices on
 
 ```
 /plugin marketplace add infobloxopen/devedge-claude-plugins
-/plugin install new-service@devedge
+/plugin install new-service@devedge      # or publish-api@devedge, run-locally@devedge, …
 ```
 
-After installing, in any directory (including an empty one) describe what you want to build:
+Then just describe what you want to do — the matching skill triggers on intent. For example:
 
 ```
-build a shopping cart microservice with devedge
+build a shopping cart microservice with devedge     # new-service
+publish the orders API and generate a typed client  # publish-api
+run my service locally and reach it on the edge      # run-locally
+scaffold a discovery uFE with devedge                # new-ufe
+compose orders and inventory into one binary         # compose-services
 ```
 
-The `new-service` skill takes it from there: it pins the SDK version, scaffolds a
-fail-closed gRPC/REST service, models your domain (owner resource, child resources, and any
-custom methods), generates, builds, runs it, and round-trips the real operations — following
-the published devedge-sdk docs at each step.
+Each skill drives its operation end to end — pinning versions, using the real `de`/`apx`
+tooling, and following the published devedge docs and `--help` as ground truth at each step.
 
 ## Plugins
 
+Each plugin is one skill for a common devedge operation. Install the ones you need
+(`/plugin install <name>@devedge`), or all of them.
+
 | Plugin | Skill | What it does |
 |---|---|---|
-| `new-service` | `new-service` | Bootstrap and build a microservice on devedge-sdk. |
+| `new-service` | `new-service` | Bootstrap and build a microservice on devedge-sdk from a prompt. |
+| `publish-api` | `publish-api` | Publish a service's API as OpenAPI through apx and generate/consume a typed TS client (local hot-loop included). |
+| `run-locally` | `run-locally` | Bring a service up on the local dev edge (`*.dev.test`), round-trip it, and diagnose why it isn't reachable. |
+| `new-ufe` | `new-ufe` | Scaffold an Angular + single-spa micro-frontend wired to the devedge-ufe SDK and a `kind:Shell` roster. |
+| `compose-services` | `compose-services` | Compose several service modules into one host process (a suite binary) and deploy it. |
 
 ## Updating
 
@@ -49,12 +59,12 @@ this repository.
 ├── .claude-plugin/
 │   └── marketplace.json          # the "devedge" marketplace catalog
 └── plugins/
-    └── new-service/
+    └── <plugin>/                 # new-service, publish-api, run-locally, new-ufe, compose-services
         ├── .claude-plugin/
-        │   └── plugin.json       # the new-service plugin manifest
+        │   └── plugin.json       # the plugin manifest (name, version, description)
         └── skills/
-            └── new-service/
-                └── SKILL.md      # the bootstrap skill
+            └── <plugin>/
+                └── SKILL.md      # the skill
 ```
 
 ## License

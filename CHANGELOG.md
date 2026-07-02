@@ -1,5 +1,30 @@
 # Changelog
 
+## v0.2.0 — 2026-07-02
+
+Four new plugins covering the common devedge operations beyond bootstrapping. Each is a single
+skill matching the `new-service` shape: a trigger-focused description, a "where the truth lives"
+grounding section (hosted docs + `de`/`apx --help` as authoritative), a numbered workflow,
+verified gotchas, and guardrails. `new-service` is unchanged (stays at 0.1.2).
+
+- **`publish-api` (0.1.0)** — publish a service's public API as OpenAPI v3 through apx and
+  generate/consume a typed `@<scope>/<svc>-client` TypeScript/Angular package (apx orchestrates
+  ng-openapi-gen). Covers `de api publish [--client|--publish-client]`, standalone
+  `apx client generate`/`publish`, consuming the client in a uFE via `provideApiConfiguration`,
+  and the unreleased-API hot-loop (`apx add --path/--git` + `apx client generate --from`).
+- **`run-locally` (0.1.0)** — bring a service up on the local dev edge and round-trip it:
+  `de install` (daemon + `*.dev.test` DNS + TLS trust), daemon lifecycle (`start`/`status`/
+  `doctor`), route registration (`de project up` from `devedge.yaml`, or `de register`), reaching
+  the service, and diagnosing daemon-vs-route-vs-trust failures.
+- **`new-ufe` (0.1.0)** — scaffold an Angular-15 + single-spa micro-frontend with `de ufe new`,
+  wired to the open-core `@infobloxopen/devedge-ufe-*` SDK (validated nav group, session in
+  Angular DI, bearer interceptor) and registered into a `kind:Shell` roster. Cross-references
+  `publish-api` for a typed backend client.
+- **`compose-services` (0.1.0)** — compose several service modules into one host process with
+  `de compose` (init → add → tidy → build → test → up/chart). Covers the module/host split,
+  static composition (no Go plugins), descriptor/version conflict checks, DB module-namespacing
+  under tenant isolation, and the `failurePolicy`/chart topologies.
+
 ## v0.1.2 — 2026-07-01
 
 ### new-service skill

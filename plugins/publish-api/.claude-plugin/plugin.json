@@ -1,0 +1,12 @@
+{
+  "name": "publish-api",
+  "description": "Publish a devedge service's public API as OpenAPI v3 through apx and generate/consume a typed TypeScript client, with a local hot-loop for iterating against an unreleased API.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Infoblox"
+  },
+  "homepage": "https://infobloxopen.github.io/devedge/",
+  "repository": "https://github.com/infobloxopen/devedge-claude-plugins",
+  "license": "Apache-2.0",
+  "keywords": ["devedge", "apx", "openapi", "typescript", "angular", "api-client", "codegen", "ng-openapi-gen"]
+}
