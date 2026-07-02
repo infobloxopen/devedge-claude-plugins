@@ -1,0 +1,12 @@
+{
+  "name": "model-domain",
+  "description": "Model a devedge domain with DDD rigor: find the invariants, draw aggregate boundaries (root/members vs cross-aggregate references), and expose read surfaces over the core model — mapped onto devedge's infoblox.ddd.v1 aggregates, Validate hook, and multi-surface projections.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Infoblox"
+  },
+  "homepage": "https://infobloxopen.github.io/devedge-sdk/docs/",
+  "repository": "https://github.com/infobloxopen/devedge-claude-plugins",
+  "license": "Apache-2.0",
+  "keywords": ["devedge", "devedge-sdk", "domain-driven-design", "ddd", "aggregate", "invariant", "modeling", "cqrs", "proto"]
+}

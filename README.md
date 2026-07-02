@@ -18,6 +18,7 @@ Then just describe what you want to do — the matching skill triggers on intent
 
 ```
 build a shopping cart microservice with devedge     # new-service
+should Order and its line items be one aggregate?    # model-domain
 publish the orders API and generate a typed client  # publish-api
 run my service locally and reach it on the edge      # run-locally
 scaffold a discovery uFE with devedge                # new-ufe
@@ -35,6 +36,7 @@ Each plugin is one skill for a common devedge operation. Install the ones you ne
 | Plugin | Skill | What it does |
 |---|---|---|
 | `new-service` | `new-service` | Bootstrap and build a microservice on devedge-sdk from a prompt. |
+| `model-domain` | `model-domain` | Model the domain with DDD rigor — find invariants, draw aggregate boundaries, and expose read surfaces over the core model. |
 | `publish-api` | `publish-api` | Publish a service's API as OpenAPI through apx and generate/consume a typed TS client (local hot-loop included). |
 | `run-locally` | `run-locally` | Bring a service up on the local dev edge (`*.dev.test`), round-trip it, and diagnose why it isn't reachable. |
 | `new-ufe` | `new-ufe` | Scaffold an Angular + single-spa micro-frontend wired to the devedge-ufe SDK and a `kind:Shell` roster. |

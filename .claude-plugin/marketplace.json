@@ -5,8 +5,8 @@
     "url": "https://github.com/infobloxopen"
   },
   "metadata": {
-    "description": "devedge developer-experience plugins for Claude Code — skills for the common devedge operations: bootstrap a service, run it locally, publish its API and typed client, scaffold a micro-frontend, and compose services into one binary.",
-    "version": "0.2.0"
+    "description": "devedge developer-experience plugins for Claude Code — skills for the common devedge operations: model the domain, bootstrap a service, run it locally, publish its API and typed client, scaffold a micro-frontend, and compose services into one binary.",
+    "version": "0.3.0"
   },
   "plugins": [
     {
@@ -37,6 +37,12 @@
       "name": "compose-services",
       "source": "./plugins/compose-services",
       "description": "Compose several devedge service modules into ONE host process (a k3s-style suite binary) and deploy it: init a kind:Composition, add member modules, tidy for descriptor/version conflicts, build a static host + composition.lock, smoke-test, then run or render Helm artifacts.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "model-domain",
+      "source": "./plugins/model-domain",
+      "description": "Model a devedge domain with DDD rigor: find the invariants, draw aggregate boundaries (root/members vs cross-aggregate references), and expose read surfaces over the core model — mapped onto devedge's infoblox.ddd.v1 aggregates, Validate hook, and multi-surface projections.",
       "version": "0.1.0"
     }
   ]
