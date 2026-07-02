@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.3.0 — 2026-07-02
+
+- **`model-domain` (0.1.0)** — a domain-modeling skill with Domain-Driven Design rigor,
+  spined on the **core-model-vs-surfaces** separation. It drives the modeling judgment:
+  classify entities vs value objects; find invariants and draw the smallest **aggregate**
+  boundary (root as sole write entry point, members, containment vs cross-aggregate
+  **references**); keep aggregates small and reference other aggregates by ID; and expose read
+  **surfaces** (multiple API versions/admin views over one backing model, read-only rollups,
+  member lookups) separately from the write model. It maps that judgment onto devedge's native
+  DDD machinery — `infoblox.ddd.v1` `aggregate`/`member`/`references`, the `AggregateRepository`
+  `Load`/`Save`, the root `Validate(ctx)` invariant hook, the fail-closed `AssertAggregateBoundaries`
+  gate, `storage.v1.model` multi-surface projections, and eventual cross-aggregate consistency via
+  the transactional outbox — grounded in `concepts/aggregates.md`, the `ddd`/`field`/`storage`
+  proto source, and the `testdata/iam` worked example. Composes with `publish-api` (surfaces) and
+  is distinct from `new-service` (bootstrap). Marketplace bumped to 0.3.0.
+
 ## v0.2.0 — 2026-07-02
 
 Four new plugins covering the common devedge operations beyond bootstrapping. Each is a single
