@@ -1,0 +1,12 @@
+{
+  "name": "new-ufe",
+  "description": "Scaffold a devedge micro-frontend (uFE) with `de ufe new`: an Angular-15 + single-spa app wired to the open-core @infobloxopen/devedge-ufe-* SDK — correct on first run (validated nav group, session in Angular DI, bearer interceptor) — and registered into a kind:Shell roster so a shell hosts it.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Infoblox"
+  },
+  "homepage": "https://infobloxopen.github.io/devedge-ufe-sdk/",
+  "repository": "https://github.com/infobloxopen/devedge-claude-plugins",
+  "license": "Apache-2.0",
+  "keywords": ["devedge", "devedge-ufe", "micro-frontend", "ufe", "angular", "single-spa", "shell", "frontend", "scaffold"]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "run-locally",
+  "description": "Bring a devedge service up on the local dev edge and round-trip it: install/start the daemon, register routes from devedge.yaml, reach the service over its *.dev.test hostname with working TLS, and diagnose why it isn't reachable.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Infoblox"
+  },
+  "homepage": "https://infobloxopen.github.io/devedge/",
+  "repository": "https://github.com/infobloxopen/devedge-claude-plugins",
+  "license": "Apache-2.0",
+  "keywords": ["devedge", "local-development", "dev-edge", "daemon", "routing", "tls", "dev.test", "k3d"]
+}

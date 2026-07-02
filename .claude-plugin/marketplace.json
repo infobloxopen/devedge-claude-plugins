@@ -5,8 +5,8 @@
     "url": "https://github.com/infobloxopen"
   },
   "metadata": {
-    "description": "devedge developer-experience plugins for Claude Code — bootstrap and build microservices on devedge-sdk.",
-    "version": "0.1.2"
+    "description": "devedge developer-experience plugins for Claude Code — skills for the common devedge operations: bootstrap a service, run it locally, publish its API and typed client, scaffold a micro-frontend, and compose services into one binary.",
+    "version": "0.2.0"
   },
   "plugins": [
     {
@@ -14,6 +14,30 @@
       "source": "./plugins/new-service",
       "description": "Bootstrap and build a microservice with devedge-sdk from a single prompt: discover and pin the SDK, scaffold a fail-closed gRPC/REST service, model the domain, generate, build, and run.",
       "version": "0.1.2"
+    },
+    {
+      "name": "publish-api",
+      "source": "./plugins/publish-api",
+      "description": "Publish a devedge service's public API as OpenAPI v3 through apx and generate/consume a typed TypeScript client, with a local hot-loop for iterating against an unreleased API.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "run-locally",
+      "source": "./plugins/run-locally",
+      "description": "Bring a devedge service up on the local dev edge and round-trip it: install/start the daemon, register routes from devedge.yaml, reach the service over its *.dev.test hostname with working TLS, and diagnose why it isn't reachable.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "new-ufe",
+      "source": "./plugins/new-ufe",
+      "description": "Scaffold a devedge micro-frontend (uFE) with `de ufe new`: an Angular-15 + single-spa app wired to the open-core @infobloxopen/devedge-ufe-* SDK — correct on first run (validated nav group, session in Angular DI, bearer interceptor) — and registered into a kind:Shell roster so a shell hosts it.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "compose-services",
+      "source": "./plugins/compose-services",
+      "description": "Compose several devedge service modules into ONE host process (a k3s-style suite binary) and deploy it: init a kind:Composition, add member modules, tidy for descriptor/version conflicts, build a static host + composition.lock, smoke-test, then run or render Helm artifacts.",
+      "version": "0.1.0"
     }
   ]
 }
