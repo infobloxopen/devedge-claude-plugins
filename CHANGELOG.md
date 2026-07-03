@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.4.0 — 2026-07-03
+
+Corrections from the devedge DX hardening cadence (Runs 16–19), aligned with devedge-sdk v0.52.0 /
+de v0.13.0 / devedge-ufe-sdk v0.1.3.
+
+- **`compose-services` (0.2.0)** — corrected the composition-member contract. A member exposes the
+  seam **`NewModule(db *gorm.DB) servicekit.Module` + `Models() []any`** (emitted by
+  `devedge-sdk new service` at v0.52.0+, gorm), which the composed host builds over one shared DB —
+  **not** the previously-documented zero-arg `Module()`, which never compiled as a composed binary.
+  Documents `de compose add --path <dir>` for local unpublished members, and that `de compose test`
+  now fails loud (no false pass) for an unverifiable member.
+- **`new-ufe` (0.1.1)** — added a local-dev auth note: the dev authorizer reads raw
+  `account-id`/`groups` metadata, so a bearer token alone gets `PermissionDenied` locally; the
+  scaffold wires the dev-only `devAuthInterceptor` (devedge-ufe-sdk v0.1.3+) that stamps those
+  headers for the local round-trip.
+
 ## v0.3.0 — 2026-07-02
 
 - **`model-domain` (0.1.0)** — a domain-modeling skill with Domain-Driven Design rigor,

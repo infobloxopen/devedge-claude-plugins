@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "devedge developer-experience plugins for Claude Code — skills for the common devedge operations: model the domain, bootstrap a service, run it locally, publish its API and typed client, scaffold a micro-frontend, and compose services into one binary.",
-    "version": "0.3.0"
+    "version": "0.4.0"
   },
   "plugins": [
     {
@@ -31,13 +31,13 @@
       "name": "new-ufe",
       "source": "./plugins/new-ufe",
       "description": "Scaffold a devedge micro-frontend (uFE) with `de ufe new`: an Angular-15 + single-spa app wired to the open-core @infobloxopen/devedge-ufe-* SDK — correct on first run (validated nav group, session in Angular DI, bearer interceptor) — and registered into a kind:Shell roster so a shell hosts it.",
-      "version": "0.1.0"
+      "version": "0.1.1"
     },
     {
       "name": "compose-services",
       "source": "./plugins/compose-services",
       "description": "Compose several devedge service modules into ONE host process (a k3s-style suite binary) and deploy it: init a kind:Composition, add member modules, tidy for descriptor/version conflicts, build a static host + composition.lock, smoke-test, then run or render Helm artifacts.",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "name": "model-domain",

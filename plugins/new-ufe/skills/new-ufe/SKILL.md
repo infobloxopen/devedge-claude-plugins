@@ -118,6 +118,14 @@ Because the generated operations use the app's injected `HttpClient`, the scaffo
 interceptor applies automatically — the client needs no auth code. See the publish-api skill
 for how to generate/regenerate the client (including the local `file:`-link hot-loop).
 
+> **Local-dev auth (don't get a `PermissionDenied`).** In production the bearer token carries the
+> identity, but the devedge **dev authorizer reads raw `account-id`/`groups` metadata**, not a bearer
+> subject — so a bearer token alone gets `PermissionDenied` against a local dev service. The scaffold
+> wires a **dev-only metadata-auth interceptor** (`devAuthInterceptor` / `provideDevAuthHeaders` from
+> `@infobloxopen/devedge-ufe-angular` **v0.1.3+**) into its dev environment, which stamps
+> `account-id`/`groups` headers so the local round-trip works; it is a no-op in production. If your
+> local calls 403, confirm those dev headers are configured (see the ufe-sdk `-angular` reference).
+
 ## 5. Run it and prove it works
 
 Build/serve the uFE, then bring the shell up so the uFE is hosted:

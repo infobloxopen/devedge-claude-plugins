@@ -1,7 +1,7 @@
 {
   "name": "compose-services",
   "description": "Compose several devedge service modules into ONE host process (a k3s-style suite binary) and deploy it: init a kind:Composition, add member modules, tidy for descriptor/version conflicts, build a static host + composition.lock, smoke-test, then run or render Helm artifacts.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Infoblox"
   },

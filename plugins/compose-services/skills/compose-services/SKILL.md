@@ -18,10 +18,12 @@ argument-hint: <the member services/modules to compose, and a name for the suite
 Take several devedge-sdk services and run them in **one** process — a suite binary — by
 generating a new host that imports each service's **module** and runs them together via
 `servicekit.Run`. This is static composition (imported, **not** Go plugins). The key idea:
-a service is **two artifacts** — an importable **module** that owns domain behavior and
-exposes a zero-arg `Module()` constructor, and an executable **host** that owns process
-behavior (`main`, env/flags, listeners, `os.Exit`). The *same* module runs standalone or
-composed into a suite; you change the host, not the module.
+a service is **two artifacts** — an importable **module** that owns domain behavior and exposes a
+**composition seam** (`NewModule(db *gorm.DB) servicekit.Module` + `Models() []any`), and an
+executable **host** that owns process behavior (`main`, env/flags, listeners, `os.Exit`). The host
+opens one shared DB and builds every member through its `NewModule(db)` — `servicekit` is ORM-free,
+so the host (not the module) owns the DB handle. The *same* module runs standalone or composed into a
+suite; you change the host, not the module.
 
 ## Where the truth lives (read this first)
 
@@ -38,16 +40,20 @@ matches the installed `de`:
 - **The devedge portal**, <https://infobloxopen.github.io/devedge/> — where `de compose` fits in
   the workflow alongside `de new` and `de api publish`.
 
-Generated devedge services already expose a `Module()` (protoc-gen-svc emits it), so a standalone
-service typically already qualifies as a composition member with no changes.
+Generated **gorm** services expose the composition seam (`NewModule(db)/Models()` in
+`module/compose.go`, emitted by `devedge-sdk new service` at **v0.52.0+**), so a service scaffolded on
+a current SDK qualifies as a composition member with no changes. A service generated on an older SDK
+must be regenerated to gain the seam. (ent composition is not yet supported — gorm only.)
 
 ## 1. Confirm each member is a composable module
 
-Every member must be an **importable Go package that exposes a zero-arg `Module()`** returning a
-`servicekit.Module`. Check each candidate:
+Every member must be an **importable Go package that exposes the composition seam** —
+`NewModule(db *gorm.DB) servicekit.Module` and `Models() []any` (in its `module/compose.go`) — so the
+composed host can build it over one shared DB. Check each candidate:
 
-- It was built with devedge-sdk (`de new` / `devedge-sdk new service`) — a standalone service
-  already qualifies; its generated `module` package exposes `Module()`.
+- It was built with `devedge-sdk new service` at **v0.52.0+** (gorm backend) — a standalone service
+  already qualifies; its `module` package exposes `NewModule`/`Models`. Older scaffolds must be
+  regenerated on a current SDK to gain the seam.
 - It owns **domain behavior only**. A module must **not** read env or flags, call `os.Exit`, or
   open its own listeners — the host owns all of that. If a service does any of these in code the
   module imports, that logic belongs in its `cmd/…/main.go` host, not the module.
@@ -67,13 +73,17 @@ de compose init <suite-name>            # writes composition.yaml (override with
 Add every member by its import path (optionally version-pinned `MODULE@VERSION`):
 
 ```bash
-de compose add github.com/<org>/<svc>                       # name defaults to the path's last segment
+de compose add github.com/<org>/<svc>                       # a PUBLISHED member (by import path)
+de compose add github.com/<org>/<svc> --path ../svc         # a LOCAL, unpublished member (writes a replace)
 de compose add github.com/<org>/<svc>@v1.2.0 \
   --name orders --schema orders --config-prefix orders      # override name / DB schema / config namespace
 ```
 
-`--schema` sets the module's DB namespace (defaults to `--name`); `--config-prefix` sets its
-config namespace (defaults to `--name`). Use `de compose remove <name>` to drop a member.
+Use **`--path <dir>`** to compose a **local, unpublished** module during development: it records a
+`replace` so the composed binary builds without publishing the member first (the common case when you
+are iterating on the members and the suite together). `--schema` sets the module's DB namespace
+(defaults to `--name`); `--config-prefix` sets its config namespace (defaults to `--name`). Use
+`de compose remove <name>` to drop a member.
 Confirm flags with `de compose add --help`.
 
 ## 4. Tidy — catch conflicts BEFORE building
@@ -113,7 +123,10 @@ go test ./...
 ```
 
 `de compose test` runs entirely in-process (no Docker) when there's no shared DB + migrations
-configured; the real-DB path runs only when members declare migrations and a shared DB is set.
+configured; the real-DB path runs only when members declare migrations and a shared DB is set. It
+**fails loud** (non-zero) when a member cannot be verified — it will not report a false pass for an
+unresolved external module, so a green `de compose test` means the composed host actually built and
+booted.
 
 ## 7. Run it and/or render deploy artifacts
 
