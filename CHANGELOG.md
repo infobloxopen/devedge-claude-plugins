@@ -5,11 +5,11 @@
 - **`new-shell` (0.1.0, new)** — scaffold and run a single-spa **shell** that hosts your devedge uFEs
   behind a left **side-nav menu** with `de ufe shell`. It reads the `kind:Shell` roster `de ufe new`
   writes and renders each uFE in the shell (active-route nav, signed-in user, mount-in-content) — the
-  self-contained "see it render" loop, with no example-shell copying. Documents the **commercial shell**
-  (`--preset-dir …/infoblox-cto-shell`: Okta session + the grouped INFOBLOX_GROUPS nav + PDS) and the
-  **integrated-env** dev loop (`de ufe override` — inject a locally-served uFE into a live hosted shell
-  via browser import-map-override, no proxy). Requires devedge `de ufe shell` (v0.16.0+) / `de ufe
-  override` (v0.17.0+). Pairs with `new-ufe` (scaffold the uFEs) and `run-locally` (the dev edge).
+  self-contained "see it render" loop, with no example-shell copying. `--preset-dir` is a preset
+  **extension point** (overlay a session provider, design system, and branded/grouped nav on the open
+  shell); `de ufe override` is the **integrated-env** dev loop (inject a locally-served uFE into a live
+  hosted shell via browser import-map-override, no proxy). Requires devedge `de ufe shell` (v0.16.0+) /
+  `de ufe override` (v0.17.0+). Pairs with `new-ufe` (scaffold the uFEs) and `run-locally` (the dev edge).
 
 ## v0.4.0 — 2026-07-03
 

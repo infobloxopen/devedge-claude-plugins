@@ -36,7 +36,7 @@
     {
       "name": "new-shell",
       "source": "./plugins/new-shell",
-      "description": "Scaffold and run a single-spa shell that hosts your devedge uFEs behind a left side-nav menu with `de ufe shell`: reads the kind:Shell roster `de ufe new` writes and renders each uFE in the shell — the self-contained 'see it render' loop. --preset-dir gives the Infoblox commercial shell (Okta + grouped INFOBLOX_GROUPS nav + PDS); `de ufe override` injects a local uFE into a live hosted env.",
+      "description": "Scaffold and run a single-spa shell that hosts your devedge uFEs behind a left side-nav menu with `de ufe shell`: reads the kind:Shell roster `de ufe new` writes and renders each uFE in the shell — the self-contained 'see it render' loop. `--preset-dir` is an extension point to overlay a session provider, design system, and branded/grouped nav; `de ufe override` injects a local uFE into a live hosted shell.",
       "version": "0.1.0"
     },
     {

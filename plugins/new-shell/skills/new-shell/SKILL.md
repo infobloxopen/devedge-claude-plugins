@@ -7,10 +7,10 @@ description: >-
   "scaffold a shell for my uFEs", "host discovery and orders in one shell", "give me a shell with a nav
   menu", or "I ran de ufe new, now how do I see it render". It reads the kind:Shell roster `de ufe new`
   writes and generates a runnable shell with a left side-nav (one item per uFE, active-route highlight,
-  signed-in user); each uFE mounts in the content area. Apply --preset-dir for the Infoblox commercial
-  shell (Okta session + the grouped INFOBLOX_GROUPS nav + PDS). Pairs with new-ufe (scaffold the uFEs
-  first) and run-locally (the dev edge the shell routes through).
-argument-hint: <optionally the shell.yaml roster to read and a name; or a --preset-dir for the commercial shell>
+  signed-in user); each uFE mounts in the content area. `--preset-dir` is an extension point for overlaying
+  a session provider, design system, and branded/grouped nav. Pairs with new-ufe (scaffold the uFEs first)
+  and run-locally (the dev edge the shell routes through).
+argument-hint: <optionally the shell.yaml roster to read and a name; or a --preset-dir preset to overlay>
 ---
 
 # Scaffold a devedge shell (host your uFEs, with a nav menu)
@@ -52,32 +52,31 @@ Open `https://<host>.dev.test/#<route>` (the host from `shell.yaml`) in Chrome: 
 left side-nav render, and clicking a nav item mounts that uFE in the content area. **Don't stop until it
 renders.** `*.dev.test` is mkcert-trusted and resolves through the devedge daemon.
 
-## 4. Commercial shell (Infoblox: Okta + grouped nav + PDS)
+## 4. Preset extension point (`--preset-dir`)
 
-Apply the private `infoblox-cto-shell` preset to bind the isms onto the same shell — the flat
-"Applications" side-nav becomes the real **grouped INFOBLOX_GROUPS** nav (csp.root.ui style), with an Okta
-session and PDS chrome:
+The shell is an **extension point**: `--preset-dir <path>` applies a preset overlay on top of the base
+open shell, so a downstream can rebind the session provider, design system, and a branded/grouped nav
+without forking — the same overlay seam `de ufe new --preset-dir` uses for uFEs.
 
 ```bash
-de ufe shell --preset-dir ../devedge-ufe-sdk-internal/preset/infoblox-cto-shell
+de ufe shell --preset-dir <path-to-a-preset>   # overlay a session/design-system/nav preset
 ```
 
-Requires Infoblox-CTO access + a `read:packages` token for `@infoblox-cto/*`. Locally,
-`environment.useDevSession: true` renders without a live Okta issuer; set it false + point
-`oidc.authority` at Okta for the real session.
+The open shell ships a flat "Applications" side-nav, generic OIDC (dev-session fallback), and Angular
+Material; a preset can replace any of those. (The public open core ships no proprietary preset.)
 
-## 5. Integrated mode — render your local uFE in a LIVE env
+## 5. Integrated mode — render your local uFE in a live shell
 
-To develop your uFE locally but see it inside a **live hosted shell** (e.g. a CSP env), no proxy:
+To develop your uFE locally but see it inside a **live hosted shell** (any shell that supports
+`import-map-overrides`), no proxy:
 
 ```bash
-de ufe override <ufe> --env https://<env-url> [--namespace @infoblox-csp]
+de ufe override <ufe> --env https://<live-shell-url> [--namespace <ns>]
 ```
 
 It serves your local bundle through the edge (`https://cdn.dev.test/<ufe>/main.js`, mkcert TLS + CORS) and
-prints the exact `import-map-override` / `ufeOverride(<ufe>, <bundle>)` snippet to paste in the live
-shell's DevTools console. The live shell cross-origin-fetches your local `main.js` and mounts it,
-inheriting the shell-owned session.
+prints the exact `import-map-override` snippet to paste in the live shell's DevTools console. The live
+shell cross-origin-fetches your local `main.js` and mounts it, inheriting the shell-owned session.
 
 ## Guardrails
 

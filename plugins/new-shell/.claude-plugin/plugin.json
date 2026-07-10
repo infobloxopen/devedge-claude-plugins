@@ -1,6 +1,6 @@
 {
   "name": "new-shell",
-  "description": "Scaffold a runnable single-spa SHELL for your devedge uFEs with `de ufe shell`: it reads the kind:Shell roster `de ufe new` writes and generates a host with a left side-nav menu (one item per uFE, active-route highlight, signed-in user) that renders each uFE in its content area — so you SEE your uFE render without copying an example shell. Apply --preset-dir for the Infoblox commercial shell (Okta + the grouped INFOBLOX_GROUPS nav + PDS). Pairs with new-ufe.",
+  "description": "Scaffold a runnable single-spa SHELL for your devedge uFEs with `de ufe shell`: it reads the kind:Shell roster `de ufe new` writes and generates a host with a left side-nav menu (one item per uFE, active-route highlight, signed-in user) that renders each uFE in its content area — so you SEE your uFE render without copying an example shell. `--preset-dir` is an extension point for overlaying a session provider, design system, and branded/grouped nav. Pairs with new-ufe.",
   "version": "0.1.0",
   "author": { "name": "Infoblox" },
   "homepage": "https://infobloxopen.github.io/devedge-ufe-sdk/",
