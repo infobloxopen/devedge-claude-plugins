@@ -5,8 +5,8 @@
     "url": "https://github.com/infobloxopen"
   },
   "metadata": {
-    "description": "devedge developer-experience plugins for Claude Code — skills for the common devedge operations: model the domain, bootstrap a service, run it locally, publish its API and typed client, scaffold a micro-frontend, and compose services into one binary.",
-    "version": "0.4.0"
+    "description": "devedge developer-experience plugins for Claude Code — skills for the common devedge operations: model the domain, bootstrap a service, run it locally, publish its API and typed client, scaffold a micro-frontend, host uFEs in a shell, and compose services into one binary.",
+    "version": "0.5.0"
   },
   "plugins": [
     {
@@ -32,6 +32,12 @@
       "source": "./plugins/new-ufe",
       "description": "Scaffold a devedge micro-frontend (uFE) with `de ufe new`: an Angular-15 + single-spa app wired to the open-core @infobloxopen/devedge-ufe-* SDK — correct on first run (validated nav group, session in Angular DI, bearer interceptor) — and registered into a kind:Shell roster so a shell hosts it.",
       "version": "0.1.1"
+    },
+    {
+      "name": "new-shell",
+      "source": "./plugins/new-shell",
+      "description": "Scaffold and run a single-spa shell that hosts your devedge uFEs behind a left side-nav menu with `de ufe shell`: reads the kind:Shell roster `de ufe new` writes and renders each uFE in the shell — the self-contained 'see it render' loop. --preset-dir gives the Infoblox commercial shell (Okta + grouped INFOBLOX_GROUPS nav + PDS); `de ufe override` injects a local uFE into a live hosted env.",
+      "version": "0.1.0"
     },
     {
       "name": "compose-services",

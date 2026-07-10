@@ -1,0 +1,10 @@
+{
+  "name": "new-shell",
+  "description": "Scaffold a runnable single-spa SHELL for your devedge uFEs with `de ufe shell`: it reads the kind:Shell roster `de ufe new` writes and generates a host with a left side-nav menu (one item per uFE, active-route highlight, signed-in user) that renders each uFE in its content area — so you SEE your uFE render without copying an example shell. Apply --preset-dir for the Infoblox commercial shell (Okta + the grouped INFOBLOX_GROUPS nav + PDS). Pairs with new-ufe.",
+  "version": "0.1.0",
+  "author": { "name": "Infoblox" },
+  "homepage": "https://infobloxopen.github.io/devedge-ufe-sdk/",
+  "repository": "https://github.com/infobloxopen/devedge-claude-plugins",
+  "license": "Apache-2.0",
+  "keywords": ["devedge", "devedge-ufe", "shell", "single-spa", "root-config", "side-nav", "menu", "micro-frontend", "ufe", "frontend", "render"]
+}
